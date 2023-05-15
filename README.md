@@ -3,6 +3,12 @@
 # Tensorflow 
 Tensorflow implementation of GARN
 
+## Requirements
+1. Python 3.7 
+2. Tensorflow 1.14
+3. opencv
+4. cuda 10.1
+
 ## Bibtex
 ```
 @article{wang2023global,
