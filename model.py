@@ -15,7 +15,9 @@ def gam_block(input_feature, name, ratio):
 def channel_attention(input_feature, name, ratio):
     with tf.variable_scope(name):
         channel = input_feature.get_shape()[-1]
-        Linear1 = tf.layers.dense(inputs=input_feature,
+        batch = input_feature.get_shape()[0]
+        view = input_feature.view(batch,,channel)
+        Linear1 = tf.layers.dense(inputs=view,
                                   units=channel // ratio,
                                   activation=None,
                                   name='Linear1')
@@ -58,7 +60,6 @@ def upsample_and_concat(x1, x2, output_channels, in_channels, scope_name, traina
 
         deconv_output = tf.concat([deconv, x2], 3)
         deconv_output.set_shape([None, None, None, output_channels * 2])
-
         return deconv_output
 def DecomNet_simple(input):
     with tf.variable_scope('DecomNet', reuse=tf.AUTO_REUSE):
