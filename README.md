@@ -34,8 +34,8 @@ The following shows the basic folder structure.
 ├── reflectance_restoration_net_train.py # reflectance_restoration_net_train code
 ├── evaluate.py # test code
 ├── model.py # GARN network
-├── utils.py
-├── checkpoint
+├── utils.py # Data set processing
+├── checkpoint # Training model data
 │   ├── decom_net_train #  A pre-trained
 │   ├── illumination_adjust_net_train #  A pre-trained
 │   ├── Restoration_net_train #  A pre-trained
