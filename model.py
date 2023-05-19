@@ -16,7 +16,9 @@ def channel_attention(input_feature, name, ratio):
     with tf.variable_scope(name):
         channel = input_feature.get_shape()[-1]
         batch = input_feature.get_shape()[0]
-        view = input_feature.view(batch,,channel)
+        width = input_feature.get_shape()[1]
+        height = input_feature.get_shape()[2]
+        view = input_feature.view(batch, width*height, channel)
         Linear1 = tf.layers.dense(inputs=view,
                                   units=channel // ratio,
                                   activation=None,
@@ -25,8 +27,8 @@ def channel_attention(input_feature, name, ratio):
                                   units=channel,
                                   activation=None,
                                   name='Linear2')
-
-        relu1 = tf.nn.relu(Linear2, name='relu1')
+        t_view = input_feature.view(batch, width, height, channel)
+        relu1 = tf.nn.relu(t_view, name='relu1')
     return input_feature * relu1
 def spatial_attention(input_feature, name, ratio):
     kernel_size = 8
